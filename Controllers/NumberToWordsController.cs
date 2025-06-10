@@ -36,10 +36,13 @@ public class NumberToWordsController: ControllerBase
             long dollars = (long)Math.Floor(amount);
             int cents = (int)(amount % 1 * 100);
             
-            //TODO
             string dollarsToWords = _numberToWordsService.ConvertNumberToWords(dollars);
             string centsToWords = _numberToWordsService.ConvertNumberToWords(cents);
-            return Ok($"{dollarsToWords} DOLLARS AND {centsToWords} CENTS");
+
+            string dollarWord = dollars == 1 ? "DOLLAR" : "DOLLARS";
+            string centWord = cents == 1 ? "CENT" : "CENTS";
+            
+            return Ok($"{dollarsToWords} {dollarWord} AND {centsToWords} {centWord}");
         }
         catch (Exception ex)
         {
