@@ -31,17 +31,21 @@ public class NumberToWordsController: ControllerBase
             return BadRequest("Invalid input.");
         }
 
+        if (amount < 0)
+        {
+            return BadRequest("Negative input cannot be support.");
+        }
+
         try
         {
-            long dollars = (long)Math.Floor(amount);
+            string dollars = input.Split('.')[0];
             int cents = (int)(amount % 1 * 100);
             
-            string dollarsToWords = _numberToWordsService.ConvertNumberToWords(dollars);
-            string centsToWords = _numberToWordsService.ConvertNumberToWords(cents);
+            string dollarsToWords = _numberToWordsService.ConvertsDollarsToWords(dollars);
+            string centsToWords = _numberToWordsService.ConvertCentsToWords(cents);
 
-            string dollarWord = dollars == 1 ? "DOLLAR" : "DOLLARS";
+            string dollarWord = dollars == "1" ? "DOLLAR" : "DOLLARS";
             string centWord = cents == 1 ? "CENT" : "CENTS";
-            
             return Ok($"{dollarsToWords} {dollarWord} AND {centsToWords} {centWord}");
         }
         catch (Exception ex)
