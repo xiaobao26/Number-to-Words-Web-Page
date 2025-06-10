@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NumberToWords.Services;
 
 namespace NumberToWords.Controllers;
 
@@ -7,7 +8,7 @@ namespace NumberToWords.Controllers;
 public class NumberToWordsController: ControllerBase
 {
     /// <summary>
-    /// Convert numerical input into words and passes these words as a string output parameter.
+    /// Converts numerical input into words and passes these words as a string output parameter.
     /// The input must represent a positive decimal number with up to two decimal places (dollars and cents).
     /// For example: "123.45" is valid; "123.456" or "-123.45" or "abc" is invalid.
     /// </summary>
@@ -16,6 +17,12 @@ public class NumberToWordsController: ControllerBase
     /// Returns an HTTP 200 OK response with the words;
     /// Returns an HTTP 400 Bad request if the input is invalid;
     /// </returns>
+    private readonly INumberToWordsService _numberToWordsService;
+    public NumberToWordsController(INumberToWordsService numberToWordsService)
+    {
+        _numberToWordsService = numberToWordsService;
+    }
+    
     [HttpPost]
     public IActionResult Convert([FromBody] string input)
     {
@@ -26,11 +33,13 @@ public class NumberToWordsController: ControllerBase
 
         try
         {
-            long dollors = (long)Math.Floor(amount);
+            long dollars = (long)Math.Floor(amount);
             int cents = (int)(amount % 1 * 100);
             
             //TODO
-            return Ok($"Success: {dollors} AND {cents}");
+            string dollarsToWords = _numberToWordsService.ConvertNumberToWords(dollars);
+            string centsToWords = _numberToWordsService.ConvertNumberToWords(cents);
+            return Ok($"{dollarsToWords} DOLLARS AND {centsToWords} CENTS");
         }
         catch (Exception ex)
         {

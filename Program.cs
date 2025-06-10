@@ -1,9 +1,13 @@
+using NumberToWords.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add Services to container
 builder.Services.AddEndpointsApiExplorer(); 
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<INumberToWordsService, NumberToWordsService>();
 
 
 var app = builder.Build();
