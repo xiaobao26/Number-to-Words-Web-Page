@@ -40,6 +40,11 @@ public class NumberToWordsController: ControllerBase
         {
             string dollars = input.Split('.')[0];
             int cents = (int)(amount % 1 * 100);
+
+            if (dollars.Length > 15)
+            {
+                return BadRequest("Large number out of range.");
+            }
             
             string dollarsToWords = _numberToWordsService.ConvertsDollarsToWords(dollars);
             string centsToWords = _numberToWordsService.ConvertCentsToWords(cents);
