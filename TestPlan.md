@@ -5,7 +5,7 @@
 > API endpoint: POST /api/NumberToWords
 > HTML frontend: index.html page
 
-## Test Cases
+## Integrate Test Cases
 | Test Case ID | Input                   | Expected Output                                              |
 |--------------|-------------------------|--------------------------------------------------------------|
 | Id01         | "0"                     | "ZERO DOLLARS AND ZERO CENTS"                                |
@@ -20,7 +20,7 @@
 ## Test Methodology
 > Manual testing via HTML frontend (http://localhost:5216/index.html)
 > Direct API testing via Swagger (http://localhost:5216/swagger)
-
+> dotnet test
 
 ## Limitations
 > The system supports dollar amounts up to 15 digits in length (TRILLION scale).
