@@ -9,11 +9,4 @@
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="NumberToWordsTest\obj\NumberToWordsTest.csproj.nuget.dgspec.json" />
-    <_ContentIncludedByDefault Remove="NumberToWordsTest\obj\project.assets.json" />
-    <_ContentIncludedByDefault Remove="NumberToWordsTest\obj\project.packagespec.json" />
-  </ItemGroup>
-
 </Project>
