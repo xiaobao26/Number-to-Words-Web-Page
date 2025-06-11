@@ -26,6 +26,7 @@
         if (response.ok){
             // read the response body as text string
             const text = await response.text();
+            resultElement.style.color = 'black';
             resultElement.innerText = text;
         } else {
             const errorText = await response.text();

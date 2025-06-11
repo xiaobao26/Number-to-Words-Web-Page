@@ -68,20 +68,20 @@ public class NumberToWordsService: INumberToWordsService
     /// </summary>
     /// <param name="number">The integer number to convert.</param>
     /// <returns>A string containing the words representation of the number</returns>
-    public string ConvertCentsToWords(int cents)
+    public string ConvertCentsToWords(int centsPart)
     {
         string res = "";
         
-        if (cents < 20)
+        if (centsPart < 20)
         {
-            res += UnderTwentyWords[cents];
+            res += UnderTwentyWords[centsPart];
         }
         else
         {
-            res += MultiplesOfTen[cents / 10];
-            if (cents % 10 > 0)
+            res += MultiplesOfTen[centsPart / 10];
+            if (centsPart % 10 > 0)
             {
-                res += "-" + UnderTwentyWords[cents % 10];
+                res += "-" + UnderTwentyWords[centsPart % 10];
             }
         }
 

@@ -8,7 +8,7 @@ namespace NumberToWords.Controllers;
 public class NumberToWordsController: ControllerBase
 {
     /// <summary>
-    /// Converts numerical input into words and passes these words as a string output parameter.
+    /// Converts numerical input into words and output these words as a string.
     /// The input must represent a positive decimal number with up to two decimal places (dollars and cents).
     /// For example: "123.45" is valid; "123.456" or "-123.45" or "abc" is invalid.
     /// </summary>
