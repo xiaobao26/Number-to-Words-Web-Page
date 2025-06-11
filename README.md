@@ -1,5 +1,5 @@
 # Number To Words Web Page
-This Web API converts numeric input into its equivalent words representation.
+This Web page converts numeric input into its equivalent words representation.
 
 ## Overview
 This project implements a Web API that converts a numeric input into its words representation, formatted for financial amounts (dollars and cents):

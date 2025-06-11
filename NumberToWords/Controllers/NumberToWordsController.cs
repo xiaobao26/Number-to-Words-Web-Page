@@ -16,6 +16,7 @@ public class NumberToWordsController: ControllerBase
     /// <returns>
     /// Returns an HTTP 200 OK response with the words;
     /// Returns an HTTP 400 Bad request if the input is invalid;
+    /// Returns an HTTP 500 
     /// </returns>
     private readonly INumberToWordsService _numberToWordsService;
     public NumberToWordsController(INumberToWordsService numberToWordsService)
@@ -38,20 +39,13 @@ public class NumberToWordsController: ControllerBase
 
         try
         {
-            string dollars = input.Split('.')[0];
-            int cents = (int)(amount % 1 * 100);
-
-            if (dollars.Length > 15)
-            {
-                return BadRequest("Large number out of range.");
-            }
-            
-            string dollarsToWords = _numberToWordsService.ConvertsDollarsToWords(dollars);
-            string centsToWords = _numberToWordsService.ConvertCentsToWords(cents);
-
-            string dollarWord = dollars == "1" ? "DOLLAR" : "DOLLARS";
-            string centWord = cents == 1 ? "CENT" : "CENTS";
-            return Ok($"{dollarsToWords} {dollarWord} AND {centsToWords} {centWord}");
+            var result = _numberToWordsService.ConvertAmountToWords(input, amount);
+            return Ok(result);
+        }
+        // The system supports dollar amounts up to 15 digits in length (TRILLION scale).
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
         }
         catch (Exception ex)
         {

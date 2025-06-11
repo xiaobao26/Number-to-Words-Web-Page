@@ -5,7 +5,7 @@ namespace NumberToWordsTest;
 
 public class NumberToWordsServiceTests
 {
-    private readonly NumberToWordsService _service;
+    private readonly INumberToWordsService _service;
 
     public NumberToWordsServiceTests()
     {

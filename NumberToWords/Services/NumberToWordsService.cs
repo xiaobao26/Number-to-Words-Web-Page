@@ -2,6 +2,11 @@ namespace NumberToWords.Services;
 
 public class NumberToWordsService: INumberToWordsService
 {
+    private const string SingularDollar = "DOLLAR";
+    private const string PluralDollars = "DOLLARS";
+    private const string SingularCent = "CENT";
+    private const string PluralCents = "CENTS";
+    
     private static readonly string[] UnderTwentyWords = 
     {
         "ZERO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN", "ELEVEN", "TWELVE",
@@ -17,6 +22,35 @@ public class NumberToWordsService: INumberToWordsService
     {
         "", "THOUSAND", "MILLION", "BILLION", "TRILLION"
     }; 
+    
+    /// <summary>
+    /// Converts a numeric input string into its corresponding words representation
+    /// Splits dollars part and cents part, formatted as per financial conventions.
+    /// - Dollars (as string) → supports up to TRILLION level
+    /// - Cents (as integer, range [0,99])
+    /// </summary>
+    /// <param name="input">Original User Input</param>
+    /// <param name="amount">Parsed decimal representation of the user input</param>
+    /// <returns>A formatted string representing the amount in words.</returns>
+    /// <exception cref="ArgumentException">Throw exception if the dollar length bigger than 15 </exception>
+    public string ConvertAmountToWords(string input, decimal amount)
+    {
+        string dollars = input.Split('.')[0];
+        int cents = (int)(amount % 1 * 100);
+        
+        if (dollars.Length > 15)
+        {
+            throw new ArgumentException("Large number out of range.");
+        }
+        
+        string dollarsToWords = ConvertsDollarsToWords(dollars);
+        string centsToWords = ConvertCentsToWords(cents);
+
+        string dollarWord = dollars == "1" ? SingularDollar : PluralDollars;
+        string centWord = cents == 1 ? SingularCent : PluralCents;
+
+        return $"{dollarsToWords} {dollarWord} AND {centsToWords} {centWord}";
+    }
     
     /// <summary>
     /// Converts the dollars part (string type) into its words
@@ -87,6 +121,7 @@ public class NumberToWordsService: INumberToWordsService
 
         return res;
     }
+    
 
     /// <summary>
     /// Converts a number in the range [0, 999] into words.
