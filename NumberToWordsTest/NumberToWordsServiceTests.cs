@@ -35,10 +35,7 @@ namespace NumberToWordsTest
         [InlineData("12345678901234567.99")] // 17 digits
         public void ConvertAmountToWords_ShouldThrowArgumentException_WhenDollarsTooLarge(string input)
         {
-            // Arrange
             decimal amount = decimal.Parse(input);
-
-            // Act & Assert
             Assert.Throws<ArgumentException>(() => _service.ConvertAmountToWords(input, amount));
         }
 
