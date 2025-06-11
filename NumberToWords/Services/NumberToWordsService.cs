@@ -81,7 +81,7 @@ public class NumberToWordsService: INumberToWordsService
             res += MultiplesOfTen[cents / 10];
             if (cents % 10 > 0)
             {
-                res += UnderTwentyWords[cents % 10];
+                res += "-" + UnderTwentyWords[cents % 10];
             }
         }
 
