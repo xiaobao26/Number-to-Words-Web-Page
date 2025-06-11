@@ -23,7 +23,7 @@
 > dotnet test
 
 ## Limitations
-> The system supports dollar amounts up to 15 digits in length (TRILLION scale).
+> The system supports dollar amounts up to 15 digits in length (TRILLION level).
 > Only positive numbers are supported.
 > The input must have at most two decimal places.
 

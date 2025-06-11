@@ -18,6 +18,12 @@ The solution is implemented in C# (.NET 9), with a simple HTML frontend for inte
 - Unit tests provided.
 - HTML frontend for interactive testing.
 ```
+## Limitations
+```csharp
+- The system supports dollar amounts up to 15 digits in length (TRILLION level).
+- Only positive numbers are supported.
+- The input must have at most two decimal places.
+```
 
 ## Project Structure
 ```plaintext

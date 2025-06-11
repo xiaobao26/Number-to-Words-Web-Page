@@ -58,7 +58,7 @@ public class NumberToWordsService: INumberToWordsService
     /// </summary>
     /// <param name="dollarsPart">The string number("123,456,789") to convert.</param>
     /// <returns>A string containing the words representation of the number</returns>
-    public string ConvertsDollarsToWords(string dollarsPart)
+    private string ConvertsDollarsToWords(string dollarsPart)
     {
         // Padding
         int padding = 3 - (dollarsPart.Length % 3);
@@ -102,7 +102,7 @@ public class NumberToWordsService: INumberToWordsService
     /// </summary>
     /// <param name="number">The integer number to convert.</param>
     /// <returns>A string containing the words representation of the number</returns>
-    public string ConvertCentsToWords(int centsPart)
+    private string ConvertCentsToWords(int centsPart)
     {
         string res = "";
         
