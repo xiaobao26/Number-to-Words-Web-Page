@@ -23,9 +23,6 @@ jobs:
         with:
           dotnet-version: '9.0'
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
-
       - name: dotnet publish
         run: dotnet publish ./NumberToWords/NumberToWords.csproj -c Release -o ./myapp
 
