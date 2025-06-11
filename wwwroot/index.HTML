@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Number to Words Converter</title>
+</head>
+<body>
+<h1>Number to Words Converter</h1>
+<input type="text" id="numberInput" placeholder="Enter number:123.45" />
+<button onclick="convert()">Convert</button>
+<p id="result"></p>
+
+<script>
+    async function convert() {
+        const input = document.getElementById('numberInput').value;
+
+        const response = await fetch('/api/NumberToWords', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(input)
+        });
+
+        const resultElement = document.getElementById('result');
+        if (response.ok){
+            // read the response body as text string
+            const text = await response.text();
+            resultElement.innerText = text;
+        } else {
+            const errorText = await response.text();
+            resultElement.style.color = 'red';
+            resultElement.innerText = `Error: ${errorText}`
+        }
+    }
+</script>
+</body>
+</html>
