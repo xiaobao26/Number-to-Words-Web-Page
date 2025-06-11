@@ -13,8 +13,8 @@
 | Id03         | "-123.45"               | "Negative input cannot be support.                           |
 | Id04         | "1"                     | "ONE DOLLAR AND ZERO CENTS"                                  |
 | Id05         | "abc"                   | "Invalid input."                                             |
-| Id06         | "1.01"                  | "ONE DOLLAR AND ONE CENT"                                                         |
-| Id07         | "999999999999999.99"    | "NINE HUNDRED NINETY-NINE TRILLION NINE HUNDRED NINETY-NINE BILLION NINE HUNDRED NINETY-NINE MILLION NINE HUNDRED NINETY-NINE THOUSAND NINE HUNDRED AND NINETY-NINE DOLLARS AND NINETYNINE CENTS"                                                         |
+| Id06         | "1.01"                  | "ONE DOLLAR AND ONE CENT"                                    |
+| Id07         | "999999999999999.99"    | "NINE HUNDRED NINETY-NINE TRILLION NINE HUNDRED NINETY-NINE BILLION NINE HUNDRED NINETY-NINE MILLION NINE HUNDRED NINETY-NINE THOUSAND NINE HUNDRED AND NINETY-NINE DOLLARS AND NINETYNINE CENTS"                                                        |
 | Id08         | "123456789999999999.99" | "Large number out of range."                                 |
 
 ## Test Methodology
