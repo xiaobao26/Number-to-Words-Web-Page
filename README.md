@@ -54,6 +54,9 @@ Run tests:
     
 By default, the web page will be hosted at:
      http://localhost:5216
+     
+Deployment: (14/06/2025)
+    https://numbertowordswebpage-ebfyhjdag5bsgfcb.australiacentral-01.azurewebsites.net/index.html
 ```
 ##  Troubleshooting (14/06/2025)
 ```csharp
