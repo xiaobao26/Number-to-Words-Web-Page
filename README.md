@@ -55,6 +55,18 @@ Run tests:
 By default, the API will be hosted at:
      http://localhost:5216/index.html
 ```
-
-
+##  Troubleshooting
+```csharp
+- Issue: After deployment, the app always showed "Your web app is running and waiting for your content."
+- Investigation Steps: 
+    1. Noticed two '.csproj' files in the solution (backend service + test). Tried publishing only the backend project → issue persisted.
+    2. Discovered 'index.HTML' (uppercase) was not being published on Linux (case-sensitive). 
+        Renamed to 'index.html' → static page loaded correctly.
+        But url is duplicated: 'https://numbertowordswebpage-ebfyhjdag5bsgfcb.scm.australiacentral-01.azurewebsites.net/wwwroot/wwwroot/'
+    3. Found middleware order was incorrect: 'UseDefaultFiles()' must be called before 'UseStaticFiles()' 
+- Conclusion:
+    1. File names are case-sensitive on Linux.  
+    2. Always call 'UseDefaultFiles()' before 'UseStaticFiles()'.  
+    3. When publishing multi-project solutions, ensure only the main project's output is included.  
+```
 
