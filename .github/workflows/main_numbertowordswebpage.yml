@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -21,19 +21,22 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0'
+          dotnet-version: 'v9.0'
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish ./NumberToWords/NumberToWords.csproj -c Release -o ./myapp
+        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: myapp
-          path: ./myapp
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
       name: 'Production'
@@ -46,15 +49,14 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: myapp
-          path: myapp
+          name: .net-app
       
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B78C08F8818941F4B5C8FE6968ED77C7 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E446FA739E84462B962BF753A886D654 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B789A566DF3446D6BC0BA898C7BAB759 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8A0B3F97CB244CE5AA52332AF2A57319 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_67F4D72143B04E75B245C390ABD24FCE }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_88B109FCEEF84699A50F32CE3C163310 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -62,5 +64,5 @@ jobs:
         with:
           app-name: 'NumberToWordsWebPage'
           slot-name: 'Production'
-          package: myapp
+          package: .
           
