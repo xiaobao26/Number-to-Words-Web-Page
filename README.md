@@ -52,8 +52,8 @@ Run the Application:
 Run tests:
      dotnet test
     
-By default, the API will be hosted at:
-     http://localhost:5216/index.html
+By default, the web page will be hosted at:
+     http://localhost:5216
 ```
 ##  Troubleshooting
 ```csharp
@@ -62,7 +62,6 @@ By default, the API will be hosted at:
     1. Noticed two '.csproj' files in the solution (backend service + test). Tried publishing only the backend project → issue persisted.
     2. Discovered 'index.HTML' (uppercase) was not being published on Linux (case-sensitive). 
         Renamed to 'index.html' → static page loaded correctly.
-        But url is duplicated: 'https://numbertowordswebpage-ebfyhjdag5bsgfcb.scm.australiacentral-01.azurewebsites.net/wwwroot/wwwroot/'
     3. Found middleware order was incorrect: 'UseDefaultFiles()' must be called before 'UseStaticFiles()' 
 - Conclusion:
     1. File names are case-sensitive on Linux.  
